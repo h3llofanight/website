@@ -1,0 +1,85 @@
+---
+import DesktopArea from '../components/DesktopArea.astro';
+import Dock from '../components/Dock.astro';
+import '../styles/global.css';
+import '../styles/desktop.css';
+import '../styles/window.css';
+import '../styles/finder.css';
+import '../styles/dock.css';
+import '../styles/content.css';
+
+interface ContentEntry {
+  id: string;
+  title: string;
+  type: string;
+  folder?: string;
+  htmlContent?: string;
+  vimeoUrl?: string;
+  imageUrl?: string;
+}
+
+interface Props {
+  entries: ContentEntry[];
+  base: string;
+}
+
+const { entries, base } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  text: `${base}/icons/file-text.svg`,
+  image: `${base}/icons/file-image.svg`,
+  video: `${base}/icons/file-video.svg`,
+  folder: `${base}/icons/folder.svg`,
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Desktop</title>
+  </head>
+  <body>
+    <div id="desktop">
+      <div id="desktop-wallpaper"></div>
+      <DesktopArea entries={entries} base={base} />
+      <div id="window-layer"></div>
+      <Dock base={base} />
+    </div>
+
+    <script type="application/json" id="desktop-data" set:html={JSON.stringify({
+      entries,
+      iconMap,
+      base,
+    })} />
+
+    <template id="window-template">
+      <div class="window">
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <button class="traffic-light tl-close" aria-label="Close">
+              <svg viewBox="0 0 12 12"><path d="M3.5 3.5l5 5M8.5 3.5l-5 5" stroke="#4d0000" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </button>
+            <button class="traffic-light tl-minimize" aria-label="Minimize">
+              <svg viewBox="0 0 12 12"><path d="M2.5 6h7" stroke="#995700" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </button>
+            <button class="traffic-light tl-maximize" aria-label="Maximize">
+              <svg viewBox="0 0 12 12"><path d="M3 3h6v6H3z" stroke="#006500" stroke-width="1.1" fill="none" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <span class="window-title"></span>
+        </div>
+        <div class="window-content"></div>
+      </div>
+    </template>
+
+    <slot />
+
+    <script>
+      import { initDesktop } from '../scripts/desktop';
+      initDesktop();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E8E8E8"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D0D0D0"/>
+      <stop offset="100%" stop-color="#B8B8B8"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.18)"/>
+    </filter>
+  </defs>
+  <!-- Page body -->
+  <path d="M112 40 L336 40 L400 104 L400 464 Q400 472 392 472 L120 472 Q112 472 112 464 Z" fill="url(#paper)" filter="url(#shadow)"/>
+  <!-- Corner fold -->
+  <path d="M336 40 L336 96 Q336 104 344 104 L400 104 Z" fill="url(#fold)"/>
+  <!-- Fold shadow line -->
+  <path d="M336 40 L400 104" stroke="rgba(0,0,0,0.06)" stroke-width="1" fill="none"/>
+  <!-- Text lines -->
+  <rect x="152" y="160" width="200" height="8" rx="4" fill="#C8C8C8"/>
+  <rect x="152" y="192" width="168" height="8" rx="4" fill="#D4D4D4"/>
+  <rect x="152" y="224" width="188" height="8" rx="4" fill="#D4D4D4"/>
+  <rect x="152" y="256" width="140" height="8" rx="4" fill="#D4D4D4"/>
+  <rect x="152" y="288" width="180" height="8" rx="4" fill="#D4D4D4"/>
+  <rect x="152" y="320" width="100" height="8" rx="4" fill="#D4D4D4"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="tab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6CC4F8"/>
+      <stop offset="100%" stop-color="#45A3E8"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5ABEFC"/>
+      <stop offset="100%" stop-color="#2D8FDB"/>
+    </linearGradient>
+    <linearGradient id="back" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4BA5E6"/>
+      <stop offset="100%" stop-color="#2874B8"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <!-- Back panel -->
+  <rect x="32" y="120" width="448" height="320" rx="20" ry="20" fill="url(#back)"/>
+  <!-- Tab -->
+  <path d="M52 120 L52 76 Q52 56 72 56 L196 56 Q210 56 218 72 L240 120 Z" fill="url(#tab)"/>
+  <!-- Front panel -->
+  <rect x="32" y="168" width="448" height="272" rx="18" ry="18" fill="url(#front)"/>
+  <!-- Top edge highlight -->
+  <rect x="32" y="168" width="448" height="6" rx="3" fill="rgba(255,255,255,0.25)"/>
+  <!-- Shine overlay -->
+  <rect x="32" y="168" width="448" height="136" rx="18" fill="url(#shine)"/>
+  <!-- Bottom shadow -->
+  <rect x="48" y="432" width="416" height="8" rx="4" fill="rgba(0,0,0,0.08)"/>
+</svg>

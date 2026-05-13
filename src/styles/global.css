@@ -1,0 +1,70 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --system-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono-font: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+
+  --dock-height: 62px;
+  --dock-padding: 4px;
+  --dock-margin-bottom: 4px;
+
+  --window-radius: 10px;
+  --titlebar-height: 52px;
+
+  --traffic-close: #FF5F57;
+  --traffic-minimize: #FEBC2E;
+  --traffic-maximize: #28C840;
+  --traffic-inactive: rgba(255, 255, 255, 0.12);
+
+  /* Catalina dark mode palette */
+  --bg-titlebar: rgba(56, 56, 56, 0.95);
+  --bg-toolbar: rgba(46, 46, 46, 0.95);
+  --bg-sidebar: rgba(42, 42, 42, 0.98);
+  --bg-content: #1E1E1E;
+  --bg-window: #292929;
+  --bg-dock: rgba(45, 45, 45, 0.65);
+
+  --text-primary: rgba(255, 255, 255, 0.88);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-tertiary: rgba(255, 255, 255, 0.35);
+
+  --border-window: rgba(0, 0, 0, 0.65);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --separator: rgba(255, 255, 255, 0.1);
+
+  --accent: #0A84FF;
+  --selection: #0058D0;
+  --icon-selected: rgba(10, 132, 255, 0.28);
+
+  --shadow-window: 0 22px 70px 4px rgba(0, 0, 0, 0.56), 0 0 0 0.5px var(--border-window);
+  --shadow-window-focused: 0 22px 70px 4px rgba(0, 0, 0, 0.72), 0 0 0 0.5px var(--border-window);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--system-font);
+  color: var(--text-primary);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}

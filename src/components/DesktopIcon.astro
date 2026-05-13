@@ -1,0 +1,18 @@
+---
+interface Props {
+  entryId: string;
+  title: string;
+  type: string;
+  iconSrc: string;
+  index: number;
+}
+
+const { entryId, title, type, iconSrc, index } = Astro.props;
+---
+
+<div class="desktop-icon" data-entry-id={entryId} data-type={type} data-index={index}>
+  <div class="icon-image">
+    <img src={iconSrc} alt="" draggable="false" />
+  </div>
+  <span class="icon-label">{title}</span>
+</div>

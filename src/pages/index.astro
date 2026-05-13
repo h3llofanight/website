@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import Desktop from '../layouts/Desktop.astro';
+
+const pages = await getCollection('pages');
+
+const entries = pages.map((page) => ({
+  id: page.id,
+  title: page.data.title,
+  type: page.data.type || 'text',
+  folder: page.data.folder || undefined,
+  vimeoUrl: page.data.vimeo_url || undefined,
+  imageUrl: page.data.image || undefined,
+}));
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const renderedPages = await Promise.all(
+  pages.map(async (page) => ({
+    id: page.id,
+    rendered: await render(page),
+  }))
+);
+---
+
+<Desktop entries={entries} base={base}>
+  {renderedPages.map(({ id, rendered }) => {
+    const { Content } = rendered;
+    return (
+      <template data-content-id={id}>
+        <Content />
+      </template>
+    );
+  })}
+</Desktop>

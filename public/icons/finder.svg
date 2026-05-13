@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="fg" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#84DAFE"/>
+      <stop offset="100%" stop-color="#3EB0F7"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#5EC5FC"/>
+      <stop offset="100%" stop-color="#1A8CE8"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="120" height="120" rx="26" fill="url(#bg)"/>
+  <!-- Face outline -->
+  <path d="M35 28 C35 28 32 52 33 68 C34 82 38 92 60 92 C82 92 86 82 87 68 C88 52 85 28 85 28" fill="url(#fg)" stroke="none"/>
+  <!-- Left eye -->
+  <ellipse cx="48" cy="56" rx="5" ry="8" fill="#1C1C1E"/>
+  <!-- Right eye -->
+  <ellipse cx="72" cy="56" rx="5" ry="8" fill="#1C1C1E"/>
+  <!-- Nose line -->
+  <line x1="60" y1="48" x2="60" y2="72" stroke="#1A8CE8" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <!-- Smile -->
+  <path d="M42 76 Q44 72 50 72 Q56 72 58 78 Q60 82 60 82 Q60 82 62 78 Q64 72 70 72 Q76 72 78 76" fill="none" stroke="#1C1C1E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,131 @@
+.window {
+  position: absolute;
+  min-width: 360px;
+  min-height: 240px;
+  border-radius: var(--window-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-window);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-window);
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.25s ease;
+}
+
+.window.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.window.focused {
+  box-shadow: var(--shadow-window-focused);
+}
+
+/* --- Title bar --- */
+.window-titlebar {
+  height: var(--titlebar-height);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--bg-titlebar);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: default;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* --- Traffic lights --- */
+.traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+}
+
+.traffic-light svg {
+  width: 8px;
+  height: 8px;
+  opacity: 0;
+  transition: opacity 0.08s;
+}
+
+.traffic-light.tl-close { background: var(--traffic-close); }
+.traffic-light.tl-minimize { background: var(--traffic-minimize); }
+.traffic-light.tl-maximize { background: var(--traffic-maximize); }
+
+/* Inactive window: grey dots */
+.window:not(.focused) .traffic-light {
+  background: var(--traffic-inactive);
+}
+
+.window:not(.focused) .traffic-light svg {
+  display: none;
+}
+
+/* Show glyphs on hover */
+.traffic-lights:hover .traffic-light svg {
+  opacity: 1;
+}
+
+/* Hover colors */
+.traffic-lights:hover .tl-close { background: #FF5F57; }
+.traffic-lights:hover .tl-minimize { background: #FEBC2E; }
+.traffic-lights:hover .tl-maximize { background: #28C840; }
+
+/* --- Window title --- */
+.window-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 80px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.window.focused .window-title {
+  color: var(--text-primary);
+}
+
+/* --- Window content --- */
+.window-content {
+  flex: 1;
+  overflow: auto;
+  background: var(--bg-content);
+}
+
+.window-content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.window-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

@@ -1,0 +1,61 @@
+#dock {
+  position: fixed;
+  bottom: var(--dock-margin-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: var(--dock-padding) 8px;
+  background: var(--bg-dock);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.3),
+    0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.dock-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  transition: transform 0.15s ease;
+  position: relative;
+}
+
+.dock-icon:hover {
+  transform: scale(1.25) translateY(-8px);
+}
+
+.dock-icon img {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+.dock-icon .dock-indicator {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.dock-separator {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 4px;
+  align-self: center;
+  flex-shrink: 0;
+}

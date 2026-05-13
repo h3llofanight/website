@@ -1,0 +1,13 @@
+---
+interface Props {
+  base: string;
+}
+
+const { base } = Astro.props;
+---
+
+<div id="dock">
+  <div class="dock-icon" data-action="show-desktop" title="Finder">
+    <img src={`${base}/icons/folder.svg`} alt="Finder" width="36" height="36" draggable="false" />
+  </div>
+</div>

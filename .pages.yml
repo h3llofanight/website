@@ -7,5 +7,28 @@ content:
     fields:
       - name: title
         type: string
+      - name: type
+        label: Content Type
+        type: select
+        options:
+          - text
+          - image
+          - video
+          - folder
+      - name: folder
+        label: Folder
+        type: string
+        description: "Parent folder path (e.g. 'projects' or 'projects/2024'). Leave empty for desktop root."
+      - name: thumbnail
+        label: Thumbnail
+        type: image
+      - name: vimeo_url
+        label: Vimeo URL
+        type: string
+        description: "Vimeo video URL (for video type)"
+      - name: image
+        label: Image
+        type: image
+        description: "Image file (for image type)"
       - name: body
         type: rich-text
