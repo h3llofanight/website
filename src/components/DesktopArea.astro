@@ -6,45 +6,28 @@ interface Entry {
   title: string;
   type: string;
   folder?: string;
+  icon?: string;
 }
 
 interface Props {
   entries: Entry[];
   base: string;
+  iconMap: Record<string, string>;
 }
 
-const { entries, base } = Astro.props;
-
-function getIconSrc(type: string): string {
-  const iconMap: Record<string, string> = {
-    text: `${base}/icons/file-text.svg`,
-    image: `${base}/icons/file-image.svg`,
-    video: `${base}/icons/file-video.svg`,
-    folder: `${base}/icons/folder.svg`,
-  };
-  return iconMap[type] || iconMap.text;
-}
+const { entries, base, iconMap } = Astro.props;
 
 const rootEntries = entries.filter(e => !e.folder);
-
-const iconSize = 90;
-const iconGap = 8;
-const paddingTop = 16;
-const paddingRight = 16;
 ---
 
 <div id="desktop-area">
-  {rootEntries.map((entry, i) => {
-    const col = Math.floor(i / Math.floor((900 - paddingTop) / (iconSize + iconGap)));
-    const row = i % Math.floor((900 - paddingTop) / (iconSize + iconGap));
-    return (
-      <DesktopIcon
-        entryId={entry.id}
-        title={entry.title}
-        type={entry.type}
-        iconSrc={getIconSrc(entry.type)}
-        index={i}
-      />
-    );
-  })}
+  {rootEntries.map((entry, i) => (
+    <DesktopIcon
+      entryId={entry.id}
+      title={entry.title}
+      type={entry.type}
+      iconSrc={entry.icon || iconMap[entry.type] || iconMap.text}
+      index={i}
+    />
+  ))}
 </div>

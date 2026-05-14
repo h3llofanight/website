@@ -1,13 +1,43 @@
 ---
-interface Props {
-  base: string;
+interface DockItem {
+  id: string;
+  title: string;
+  icon?: string;
+  url?: string;
+  entryId?: string;
 }
 
-const { base } = Astro.props;
+interface Props {
+  base: string;
+  items: DockItem[];
+  defaultIcon: string;
+}
+
+const { base, items, defaultIcon } = Astro.props;
 ---
 
 <div id="dock">
-  <div class="dock-icon" data-action="show-desktop" title="Finder">
-    <img src={`${base}/icons/folder.svg`} alt="Finder" width="36" height="36" draggable="false" />
-  </div>
+  {items.length > 0 ? (
+    items.map((item) => (
+      <div
+        class="dock-icon"
+        title={item.title}
+        data-dock-id={item.id}
+        data-url={item.url || ''}
+        data-entry-id={item.entryId || ''}
+      >
+        <img
+          src={item.icon || defaultIcon}
+          alt={item.title}
+          width="46"
+          height="46"
+          draggable="false"
+        />
+      </div>
+    ))
+  ) : (
+    <div class="dock-icon" data-action="show-desktop" title="Finder">
+      <img src={defaultIcon} alt="Finder" width="46" height="46" draggable="false" />
+    </div>
+  )}
 </div>

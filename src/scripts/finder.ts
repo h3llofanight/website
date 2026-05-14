@@ -6,6 +6,7 @@ interface DesktopEntry {
   title: string;
   type: string;
   folder?: string;
+  icon?: string;
   vimeoUrl?: string;
   imageUrl?: string;
 }
@@ -158,7 +159,7 @@ export function openFinderWindow(folderId: string, folderTitle: string, folderPa
         item.dataset.entryId = entry.id;
         item.dataset.type = entry.type;
 
-        const iconSrc = data.iconMap[entry.type] || data.iconMap.text;
+        const iconSrc = entry.icon || data.iconMap[entry.type] || data.iconMap.text;
         item.innerHTML = `
           <div class="finder-grid-icon"><img src="${iconSrc}" alt="" draggable="false" /></div>
           <span class="finder-grid-label">${entry.title}</span>

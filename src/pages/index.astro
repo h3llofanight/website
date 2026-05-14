@@ -3,17 +3,31 @@ import { getCollection, render } from 'astro:content';
 import Desktop from '../layouts/Desktop.astro';
 
 const pages = await getCollection('pages');
+const siteEntries = await getCollection('site');
+const dockEntries = await getCollection('dock');
+
+const siteSettings = siteEntries[0]?.data ?? { title: 'Desktop', description: 'A personal website' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const dockItems = dockEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((d) => ({
+    id: d.id,
+    title: d.data.title,
+    icon: d.data.icon || undefined,
+    url: d.data.url || undefined,
+    entryId: d.data.entry_id || undefined,
+  }));
 
 const entries = pages.map((page) => ({
   id: page.id,
   title: page.data.title,
   type: page.data.type || 'text',
   folder: page.data.folder || undefined,
+  icon: page.data.icon || undefined,
   vimeoUrl: page.data.vimeo_url || undefined,
   imageUrl: page.data.image || undefined,
 }));
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const renderedPages = await Promise.all(
   pages.map(async (page) => ({
@@ -23,7 +37,20 @@ const renderedPages = await Promise.all(
 );
 ---
 
-<Desktop entries={entries} base={base}>
+<Desktop
+  entries={entries}
+  base={base}
+  siteTitle={siteSettings.title}
+  siteDescription={siteSettings.description}
+  wallpaper={siteSettings.wallpaper}
+  iconOverrides={{
+    text: siteSettings.icon_text,
+    image: siteSettings.icon_image,
+    video: siteSettings.icon_video,
+    folder: siteSettings.icon_folder,
+  }}
+  dockItems={dockItems}
+>
   {renderedPages.map(({ id, rendered }) => {
     const { Content } = rendered;
     return (

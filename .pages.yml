@@ -1,5 +1,64 @@
 media: media
 content:
+  - name: site
+    label: Site Settings
+    type: file
+    path: settings/site.md
+    fields:
+      - name: title
+        label: Site Title
+        type: string
+        description: "Displayed in the browser tab"
+      - name: description
+        label: Site Description
+        type: string
+        description: "Meta description for SEO"
+      - name: wallpaper
+        label: Desktop Wallpaper
+        type: image
+        description: "Background image for the desktop. Leave empty for default gradient."
+      - name: icon_text
+        label: Text File Icon
+        type: image
+        description: "Custom icon for text files. Leave empty for default."
+      - name: icon_image
+        label: Image File Icon
+        type: image
+        description: "Custom icon for image files. Leave empty for default."
+      - name: icon_video
+        label: Video File Icon
+        type: image
+        description: "Custom icon for video files. Leave empty for default."
+      - name: icon_folder
+        label: Folder Icon
+        type: image
+        description: "Custom icon for folders. Leave empty for default."
+
+  - name: dock
+    label: Dock Shortcuts
+    type: collection
+    path: dock
+    fields:
+      - name: title
+        label: Tooltip Label
+        type: string
+      - name: icon
+        label: Dock Icon
+        type: image
+        description: "Icon image displayed in the dock"
+      - name: url
+        label: URL
+        type: string
+        description: "External link (e.g. https://github.com/you). Leave empty to open a folder/file by ID."
+      - name: entry_id
+        label: Entry ID
+        type: string
+        description: "Open a desktop file or folder by its filename (without .md). Ignored if URL is set."
+      - name: order
+        label: Sort Order
+        type: number
+        description: "Lower numbers appear first in the dock"
+
   - name: pages
     label: Pages
     type: collection
@@ -18,7 +77,11 @@ content:
       - name: folder
         label: Folder
         type: string
-        description: "Parent folder path (e.g. 'projects' or 'projects/2024'). Leave empty for desktop root."
+        description: "Parent folder path (e.g. 'projects' or 'projects/subfolder'). Leave empty for desktop root."
+      - name: icon
+        label: Custom Icon
+        type: image
+        description: "Override the default icon for this entry"
       - name: thumbnail
         label: Thumbnail
         type: image

@@ -7,7 +7,14 @@
   position: fixed;
   inset: 0;
   z-index: 0;
-  /* Catalina dark wallpaper — deep ocean blues and dark purple sky */
+  background-color: #000010;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#desktop-wallpaper:not([style*="background-image"]) {
+  /* Default Catalina dark wallpaper when no custom image is set */
   background:
     radial-gradient(ellipse 120% 80% at 50% 100%, #0a2540 0%, transparent 70%),
     radial-gradient(ellipse 80% 50% at 30% 80%, #1a3a5c 0%, transparent 60%),

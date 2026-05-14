@@ -1,5 +1,3 @@
-import { openWindow } from './window-manager';
-import { makeDraggable } from './drag';
 import { openFinderWindow, openContentWindow, getData } from './finder';
 
 export function initDesktop(): void {
@@ -83,13 +81,8 @@ function initIcons(): void {
       }
     });
 
-    icon.addEventListener('pointerup', (e: PointerEvent) => {
+    icon.addEventListener('pointerup', () => {
       icon.classList.remove('dragging');
-
-      if (!dragStarted && Date.now() - pointerDownTime < 300) {
-        // This was a click, not a drag — selection already handled in pointerdown
-      }
-
       dragStarted = false;
     });
 
@@ -119,13 +112,30 @@ function initDesktopClick(): void {
 }
 
 function initDock(): void {
-  const finderIcon = document.querySelector('.dock-icon[data-action="show-desktop"]');
-  finderIcon?.addEventListener('dblclick', () => {
-    const windowLayer = document.getElementById('window-layer');
-    if (windowLayer) {
-      windowLayer.innerHTML = '';
-    }
+  const dockIcons = document.querySelectorAll<HTMLElement>('.dock-icon');
+  const data = getData();
+
+  dockIcons.forEach((dockIcon) => {
+    dockIcon.addEventListener('click', () => {
+      const url = dockIcon.dataset.url;
+      const entryId = dockIcon.dataset.entryId;
+
+      if (url) {
+        window.open(url, '_blank');
+        return;
+      }
+
+      if (entryId) {
+        const entry = data.entries.find((e) => e.id === entryId);
+        if (entry) {
+          if (entry.type === 'folder') {
+            openFinderWindow(entryId, entry.title, entryId);
+          } else {
+            openContentWindow(entry);
+          }
+        }
+        return;
+      }
+    });
   });
 }
-
-export { openContentWindow };

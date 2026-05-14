@@ -13,24 +13,44 @@ interface ContentEntry {
   title: string;
   type: string;
   folder?: string;
-  htmlContent?: string;
+  icon?: string;
   vimeoUrl?: string;
   imageUrl?: string;
+}
+
+interface DockItem {
+  id: string;
+  title: string;
+  icon?: string;
+  url?: string;
+  entryId?: string;
 }
 
 interface Props {
   entries: ContentEntry[];
   base: string;
+  siteTitle: string;
+  siteDescription: string;
+  wallpaper?: string;
+  iconOverrides: {
+    text?: string;
+    image?: string;
+    video?: string;
+    folder?: string;
+  };
+  dockItems: DockItem[];
 }
 
-const { entries, base } = Astro.props;
+const { entries, base, siteTitle, siteDescription, wallpaper, iconOverrides, dockItems } = Astro.props;
 
 const iconMap: Record<string, string> = {
-  text: `${base}/icons/file-text.svg`,
-  image: `${base}/icons/file-image.svg`,
-  video: `${base}/icons/file-video.svg`,
-  folder: `${base}/icons/folder.svg`,
+  text: iconOverrides.text || `${base}/icons/file-text.svg`,
+  image: iconOverrides.image || `${base}/icons/file-image.svg`,
+  video: iconOverrides.video || `${base}/icons/file-video.svg`,
+  folder: iconOverrides.folder || `${base}/icons/folder.svg`,
 };
+
+const wallpaperUrl = wallpaper || '';
 ---
 
 <!DOCTYPE html>
@@ -39,20 +59,26 @@ const iconMap: Record<string, string> = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Desktop</title>
+    <meta name="description" content={siteDescription} />
+    <title>{siteTitle}</title>
   </head>
   <body>
     <div id="desktop">
-      <div id="desktop-wallpaper"></div>
-      <DesktopArea entries={entries} base={base} />
+      {wallpaperUrl ? (
+        <div id="desktop-wallpaper" style={`background-image: url('${wallpaperUrl}');`}></div>
+      ) : (
+        <div id="desktop-wallpaper"></div>
+      )}
+      <DesktopArea entries={entries} base={base} iconMap={iconMap} />
       <div id="window-layer"></div>
-      <Dock base={base} />
+      <Dock base={base} items={dockItems} defaultIcon={iconMap.folder} />
     </div>
 
     <script type="application/json" id="desktop-data" set:html={JSON.stringify({
       entries,
       iconMap,
       base,
+      dockItems,
     })} />
 
     <template id="window-template">
