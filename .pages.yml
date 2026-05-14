@@ -53,14 +53,14 @@ content:
       - name: entry_id
         label: Entry ID
         type: string
-        description: "Open a desktop file or folder by its filename (without .md). Ignored if URL is set."
+        description: "Open a desktop file or folder by its path (e.g. 'about' or 'projects'). Ignored if URL is set."
       - name: order
         label: Sort Order
         type: number
         description: "Lower numbers appear first in the dock"
 
-  - name: pages
-    label: Pages
+  - name: desktop-files
+    label: Desktop Files
     type: collection
     path: docs
     fields:
@@ -73,11 +73,6 @@ content:
           - text
           - image
           - video
-          - folder
-      - name: folder
-        label: Folder
-        type: string
-        description: "Parent folder path (e.g. 'projects' or 'projects/subfolder'). Leave empty for desktop root."
       - name: icon
         label: Custom Icon
         type: image
@@ -93,5 +88,66 @@ content:
         label: Image
         type: image
         description: "Image file (for image type)"
+      - name: body
+        type: rich-text
+
+  - name: projects
+    label: Projects
+    type: collection
+    path: docs/projects
+    fields:
+      - name: title
+        type: string
+      - name: type
+        label: Content Type
+        type: select
+        options:
+          - text
+          - image
+          - video
+          - folder
+        description: "Use 'folder' for _index.md files that define a subfolder"
+      - name: icon
+        label: Custom Icon
+        type: image
+      - name: thumbnail
+        label: Thumbnail
+        type: image
+      - name: vimeo_url
+        label: Vimeo URL
+        type: string
+      - name: image
+        label: Image
+        type: image
+      - name: body
+        type: rich-text
+
+  - name: projects-2024
+    label: "Projects > 2024"
+    type: collection
+    path: docs/projects/2024
+    fields:
+      - name: title
+        type: string
+      - name: type
+        label: Content Type
+        type: select
+        options:
+          - text
+          - image
+          - video
+          - folder
+      - name: icon
+        label: Custom Icon
+        type: image
+      - name: thumbnail
+        label: Thumbnail
+        type: image
+      - name: vimeo_url
+        label: Vimeo URL
+        type: string
+      - name: image
+        label: Image
+        type: image
       - name: body
         type: rich-text

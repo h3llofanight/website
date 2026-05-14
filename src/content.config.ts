@@ -6,7 +6,6 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string(),
     type: z.enum(['text', 'image', 'video', 'folder']).default('text'),
-    folder: z.string().optional(),
     icon: z.string().optional(),
     thumbnail: z.string().optional(),
     vimeo_url: z.string().optional(),

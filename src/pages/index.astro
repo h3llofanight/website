@@ -19,21 +19,53 @@ const dockItems = dockEntries
     entryId: d.data.entry_id || undefined,
   }));
 
-const entries = pages.map((page) => ({
-  id: page.id,
-  title: page.data.title,
-  type: page.data.type || 'text',
-  folder: page.data.folder || undefined,
-  icon: page.data.icon || undefined,
-  vimeoUrl: page.data.vimeo_url || undefined,
-  imageUrl: page.data.image || undefined,
-}));
+// Derive folder structure from filesystem paths.
+// - _index files define folders (id like "projects/_index" → folder path "projects")
+// - Other files belong to their parent directory (id like "projects/sample-project" → folder "projects")
+// - Root-level files (id like "about") have no folder
+const entries = pages.map((page) => {
+  const id = page.id; // e.g. "about", "projects/_index", "projects/sample-project", "projects/2024/_index"
+  const isIndex = id.endsWith('/_index');
+
+  if (isIndex) {
+    // This is a folder definition
+    const folderPath = id.replace(/\/_index$/, ''); // "projects" or "projects/2024"
+    const parentFolder = folderPath.includes('/')
+      ? folderPath.substring(0, folderPath.lastIndexOf('/'))
+      : undefined;
+    return {
+      id: folderPath,
+      title: page.data.title,
+      type: 'folder' as const,
+      folder: parentFolder,
+      icon: page.data.icon || undefined,
+      vimeoUrl: undefined,
+      imageUrl: undefined,
+    };
+  }
+
+  // Regular file
+  const parentFolder = id.includes('/')
+    ? id.substring(0, id.lastIndexOf('/'))
+    : undefined;
+  return {
+    id,
+    title: page.data.title,
+    type: page.data.type || 'text',
+    folder: parentFolder,
+    icon: page.data.icon || undefined,
+    vimeoUrl: page.data.vimeo_url || undefined,
+    imageUrl: page.data.image || undefined,
+  };
+});
 
 const renderedPages = await Promise.all(
-  pages.map(async (page) => ({
-    id: page.id,
-    rendered: await render(page),
-  }))
+  pages
+    .filter((page) => !page.id.endsWith('/_index'))
+    .map(async (page) => ({
+      id: page.id,
+      rendered: await render(page),
+    }))
 );
 ---
 

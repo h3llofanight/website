@@ -1,7 +1,6 @@
 ---
 title: Sample Project
 type: text
-folder: projects
 ---
 
 # Sample Project

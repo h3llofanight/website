@@ -1,7 +1,6 @@
 ---
 title: Nested Project
 type: text
-folder: projects/subfolder
 ---
 
 # Nested Project
