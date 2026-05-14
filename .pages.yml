@@ -49,11 +49,11 @@ content:
       - name: url
         label: URL
         type: string
-        description: "External link (e.g. https://github.com/you). Leave empty to open a folder/file by ID."
+        description: "External link (e.g. https://github.com/you). Leave empty to open an entry."
       - name: entry_id
         label: Entry ID
         type: string
-        description: "Open a desktop file or folder by its path (e.g. 'about' or 'projects'). Ignored if URL is set."
+        description: "Open a desktop file or folder (e.g. 'about' or 'sample-project'). Ignored if URL is set."
       - name: order
         label: Sort Order
         type: number
@@ -76,40 +76,6 @@ content:
       - name: icon
         label: Custom Icon
         type: image
-        description: "Override the default icon for this entry"
-      - name: thumbnail
-        label: Thumbnail
-        type: image
-      - name: vimeo_url
-        label: Vimeo URL
-        type: string
-        description: "Vimeo video URL (for video type)"
-      - name: image
-        label: Image
-        type: image
-        description: "Image file (for image type)"
-      - name: body
-        type: rich-text
-
-  - name: projects
-    label: Projects
-    type: collection
-    path: docs/projects
-    fields:
-      - name: title
-        type: string
-      - name: type
-        label: Content Type
-        type: select
-        options:
-          - text
-          - image
-          - video
-          - folder
-        description: "Use 'folder' for _index.md files that define a subfolder"
-      - name: icon
-        label: Custom Icon
-        type: image
       - name: thumbnail
         label: Thumbnail
         type: image
@@ -122,10 +88,17 @@ content:
       - name: body
         type: rich-text
 
-  - name: projects-2024
-    label: "Projects > 2024"
+  # ──────────────────────────────────────
+  # Projects (each project = a folder on the desktop)
+  # To add a new project:
+  #   1. Create docs/<project-name>/_index.md with type: folder
+  #   2. Copy a project block below and update name/label/path
+  # ──────────────────────────────────────
+
+  - name: sample-project
+    label: "Project: Sample Project"
     type: collection
-    path: docs/projects/2024
+    path: docs/sample-project
     fields:
       - name: title
         type: string
@@ -137,6 +110,7 @@ content:
           - image
           - video
           - folder
+        description: "Use 'folder' only for _index.md (defines the project folder itself)"
       - name: icon
         label: Custom Icon
         type: image
