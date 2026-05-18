@@ -60,16 +60,21 @@ const projectFields = `      - name: title
           - image
           - video
           - folder
-        description: "Use 'folder' only for _index.md (defines the project folder itself)"
+        description: "text = markdown document · image = image viewer · video = embedded or uploaded video · folder = subfolder (only for _index.md)"
       - name: icon
         label: Custom Icon
         type: image
       - name: thumbnail
         label: Thumbnail
         type: image
-      - name: vimeo_url
-        label: Vimeo URL
+      - name: video_url
+        label: Video URL
         type: string
+        description: "Vimeo, YouTube, or any embeddable video URL"
+      - name: video
+        label: Video File
+        type: image
+        description: "Upload a video file (mp4, webm, mov). Used when no Video URL is set."
       - name: image
         label: Image
         type: image
@@ -161,15 +166,21 @@ content:
           - text
           - image
           - video
+        description: "text = markdown document · image = image viewer · video = embedded or uploaded video"
       - name: icon
         label: Custom Icon
         type: image
       - name: thumbnail
         label: Thumbnail
         type: image
-      - name: vimeo_url
-        label: Vimeo URL
+      - name: video_url
+        label: Video URL
         type: string
+        description: "Vimeo, YouTube, or any embeddable video URL"
+      - name: video
+        label: Video File
+        type: image
+        description: "Upload a video file (mp4, webm, mov). Used when no Video URL is set."
       - name: image
         label: Image
         type: image

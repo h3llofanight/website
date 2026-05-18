@@ -94,3 +94,9 @@
   height: 100%;
   border: none;
 }
+
+.video-viewer video {
+  width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

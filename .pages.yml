@@ -73,15 +73,21 @@ content:
           - text
           - image
           - video
+        description: "text = markdown document · image = image viewer · video = embedded or uploaded video"
       - name: icon
         label: Custom Icon
         type: image
       - name: thumbnail
         label: Thumbnail
         type: image
-      - name: vimeo_url
-        label: Vimeo URL
+      - name: video_url
+        label: Video URL
         type: string
+        description: "Vimeo, YouTube, or any embeddable video URL"
+      - name: video
+        label: Video File
+        type: image
+        description: "Upload a video file (mp4, webm, mov). Used when no Video URL is set."
       - name: image
         label: Image
         type: image
@@ -103,7 +109,7 @@ content:
         description: "Custom icon for this project folder. Leave empty for default folder icon."
 
   - name: "project-2026-05-18-test2"
-    label: "Project: test2"
+    label: "Project: 2026-05-18-test2"
     type: collection
     path: docs/2026-05-18-test2
     fields:
@@ -117,16 +123,21 @@ content:
           - image
           - video
           - folder
-        description: "Use 'folder' only for _index.md (defines the project folder itself)"
+        description: "text = markdown document · image = image viewer · video = embedded or uploaded video · folder = subfolder (only for _index.md)"
       - name: icon
         label: Custom Icon
         type: image
       - name: thumbnail
         label: Thumbnail
         type: image
-      - name: vimeo_url
-        label: Vimeo URL
+      - name: video_url
+        label: Video URL
         type: string
+        description: "Vimeo, YouTube, or any embeddable video URL"
+      - name: video
+        label: Video File
+        type: image
+        description: "Upload a video file (mp4, webm, mov). Used when no Video URL is set."
       - name: image
         label: Image
         type: image
@@ -148,16 +159,21 @@ content:
           - image
           - video
           - folder
-        description: "Use 'folder' only for _index.md (defines the project folder itself)"
+        description: "text = markdown document · image = image viewer · video = embedded or uploaded video · folder = subfolder (only for _index.md)"
       - name: icon
         label: Custom Icon
         type: image
       - name: thumbnail
         label: Thumbnail
         type: image
-      - name: vimeo_url
-        label: Vimeo URL
+      - name: video_url
+        label: Video URL
         type: string
+        description: "Vimeo, YouTube, or any embeddable video URL"
+      - name: video
+        label: Video File
+        type: image
+        description: "Upload a video file (mp4, webm, mov). Used when no Video URL is set."
       - name: image
         label: Image
         type: image

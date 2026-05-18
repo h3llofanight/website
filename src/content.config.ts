@@ -8,7 +8,8 @@ const pages = defineCollection({
     type: z.enum(['text', 'image', 'video', 'folder']).default('text'),
     icon: z.string().optional(),
     thumbnail: z.string().optional(),
-    vimeo_url: z.string().optional(),
+    video_url: z.string().optional(),
+    video: z.string().optional(),
     image: z.string().optional(),
   }),
 });

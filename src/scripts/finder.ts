@@ -7,7 +7,8 @@ interface DesktopEntry {
   type: string;
   folder?: string;
   icon?: string;
-  vimeoUrl?: string;
+  videoUrl?: string;
+  videoFile?: string;
   imageUrl?: string;
 }
 
@@ -296,10 +297,10 @@ export function openFinderWindow(folderId: string, folderTitle: string, folderPa
 function openContentWindow(entry: DesktopEntry): void {
   const data = getData();
 
-  if (entry.type === 'video' && entry.vimeoUrl) {
-    const vimeoId = extractVimeoId(entry.vimeoUrl);
-    if (vimeoId) {
-      const content = `<div class="video-viewer"><iframe src="https://player.vimeo.com/video/${vimeoId}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+  if (entry.type === 'video') {
+    const videoHtml = buildVideoEmbed(entry, data.base);
+    if (videoHtml) {
+      const content = `<div class="video-viewer">${videoHtml}</div>`;
       const win = openWindow(`content-${entry.id}`, entry.title, content, { width: 720, height: 450 });
       makeDraggable(win);
       return;
@@ -327,9 +328,29 @@ function openContentWindow(entry: DesktopEntry): void {
   makeDraggable(win);
 }
 
-function extractVimeoId(url: string): string | null {
-  const match = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-  return match ? match[1] : null;
+function buildVideoEmbed(entry: DesktopEntry, base: string): string | null {
+  const url = entry.videoUrl;
+
+  if (url) {
+    const vimeoId = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1];
+    if (vimeoId) {
+      return `<iframe src="https://player.vimeo.com/video/${vimeoId}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    }
+
+    const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/);
+    if (ytMatch) {
+      return `<iframe src="https://www.youtube.com/embed/${ytMatch[1]}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    }
+
+    return `<iframe src="${url}" allowfullscreen></iframe>`;
+  }
+
+  if (entry.videoFile) {
+    const src = entry.videoFile.startsWith('http') ? entry.videoFile : `${base}/${entry.videoFile}`;
+    return `<video controls><source src="${src}" /></video>`;
+  }
+
+  return null;
 }
 
 export { openContentWindow, getData };
