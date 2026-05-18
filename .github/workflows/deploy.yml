@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -20,8 +20,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sync projects
+        run: node scripts/sync-projects.mjs
+      - name: Commit generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ .pages.yml
+          git diff --cached --quiet || (git commit -m "chore: sync project folders and CMS config" && git push)
       - name: Build with Astro
         uses: withastro/action@v6
+
   deploy:
     needs: build
     runs-on: ubuntu-latest

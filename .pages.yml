@@ -88,14 +88,21 @@ content:
       - name: body
         type: rich-text
 
-  # ──────────────────────────────────────
-  # Projects (each project = a folder on the desktop)
-  # To add a new project:
-  #   1. Create docs/<project-name>/_index.md with type: folder
-  #   2. Copy a project block below and update name/label/path
-  # ──────────────────────────────────────
+  - name: projects
+    label: Create New Project
+    type: collection
+    path: _projects
+    fields:
+      - name: title
+        label: Project Title
+        type: string
+        description: "Name of the project (becomes a folder on the desktop)"
+      - name: icon
+        label: Custom Folder Icon
+        type: image
+        description: "Custom icon for this project folder. Leave empty for default folder icon."
 
-  - name: sample-project
+  - name: "project-sample-project"
     label: "Project: Sample Project"
     type: collection
     path: docs/sample-project
