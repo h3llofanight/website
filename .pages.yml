@@ -109,7 +109,7 @@ content:
         description: "Custom icon for this project folder. Leave empty for default folder icon."
 
   - name: "project-2026-05-18-test2"
-    label: "Project: 2026-05-18-test2"
+    label: "Project: test2"
     type: collection
     path: docs/2026-05-18-test2
     fields:
