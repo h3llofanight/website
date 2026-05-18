@@ -102,6 +102,37 @@ content:
         type: image
         description: "Custom icon for this project folder. Leave empty for default folder icon."
 
+  - name: "project-2026-05-18-test2"
+    label: "Project: test2"
+    type: collection
+    path: docs/2026-05-18-test2
+    fields:
+      - name: title
+        type: string
+      - name: type
+        label: Content Type
+        type: select
+        options:
+          - text
+          - image
+          - video
+          - folder
+        description: "Use 'folder' only for _index.md (defines the project folder itself)"
+      - name: icon
+        label: Custom Icon
+        type: image
+      - name: thumbnail
+        label: Thumbnail
+        type: image
+      - name: vimeo_url
+        label: Vimeo URL
+        type: string
+      - name: image
+        label: Image
+        type: image
+      - name: body
+        type: rich-text
+
   - name: "project-sample-project"
     label: "Project: Sample Project"
     type: collection
