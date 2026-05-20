@@ -144,6 +144,42 @@ content:
       - name: body
         type: rich-text
 
+  - name: "project-2026-05-20-ciaone"
+    label: "Project: ciaone"
+    type: collection
+    path: docs/2026-05-20-ciaone
+    fields:
+      - name: title
+        type: string
+      - name: type
+        label: Content Type
+        type: select
+        options:
+          - text
+          - image
+          - video
+          - folder
+        description: "text = markdown document · image = image viewer · video = embedded or uploaded video · folder = subfolder (only for _index.md)"
+      - name: icon
+        label: Custom Icon
+        type: image
+      - name: thumbnail
+        label: Thumbnail
+        type: image
+      - name: video_url
+        label: Video URL
+        type: string
+        description: "Vimeo, YouTube, or any embeddable video URL"
+      - name: video
+        label: Video File
+        type: image
+        description: "Upload a video file (mp4, webm, mov). Used when no Video URL is set."
+      - name: image
+        label: Image
+        type: image
+      - name: body
+        type: rich-text
+
   - name: "project-sample-project"
     label: "Project: Sample Project"
     type: collection
